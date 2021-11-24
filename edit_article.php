@@ -52,24 +52,35 @@ require 'blocks/head.php';
 <script>
     $('#edit_article').click(function () {
         let id = '<?php echo $article->id ?>';
+
         let title = $('#title').val();
+        let oldTitle = '<?php echo $article->title ?>';
+
         let announce = $('#announce').val();
+        let oldAnnounce = '<?php echo $article->announce ?>';
+
         let body = $('#body').val();
+        let oldBody = '<?php echo $article->body ?>';
+
         let created_at = '<?php echo $article->created_at ?>';
 
-        $.ajax({
-            url: 'ajax/ajax_edit_article.php',
-            type: 'POST',
-            cache: false,
-            data: {'id': id, 'title': title, 'announce': announce, 'body': body, 'created_at': created_at},
-            dataType: 'html',
-            success: function(data) {
-                if (data.indexOf('Введите') === -1) {
-                    document.location.href = '/news/article.php?id=' + data;
-                } else {
-                    $('#error_block').show().text(data);
+        if (title != oldTitle || announce != oldAnnounce || body != oldBody) {
+            $.ajax({
+                url: 'ajax/ajax_edit_article.php',
+                type: 'POST',
+                cache: false,
+                data: {'id': id, 'title': title, 'announce': announce, 'body': body, 'created_at': created_at},
+                dataType: 'html',
+                success: function(data) {
+                    if (data.indexOf('Введите') === -1) {
+                        document.location.href = '/news/article.php?id=' + data;
+                    } else {
+                        $('#error_block').show().text(data);
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            $('#error_block').show().text('Вы не изменили запись');
+        }
     });
 </script>

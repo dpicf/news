@@ -14,9 +14,9 @@ require 'blocks/head.php';
 
 ?>
 
-<?php require 'blocks/header.php'?>
+<?php require 'blocks/header.php' ?>
 
-<?php //require 'edit_article.php'?>
+<?php require 'functions.php' ?>
 
 <main class="container mt-5">
     <div class="row">
@@ -24,9 +24,11 @@ require 'blocks/head.php';
             <div class="jumbotron">
                 <h1><?=$article->title?></h1>
                 <p><?php
-                    require 'functions.php';
-                    echo "<b>Время публикации:</b> " . show_date($article);
-                ?></p>
+                    echo "<b>Время публикации:</b> " . show_date($article->created_at);
+                    ?></p>
+                <p><?php
+                    echo "<b>Время обновления:</b> " . show_date($article->updated_at);
+                    ?></p>
                 <p>
                     <?=$article->announce?>
                     <br><br>
@@ -47,11 +49,6 @@ require 'blocks/head.php';
 </main>
 
 <script>
-    // $('#edit_article').click(function () {
-    //     $('.container').hide();
-    //     $('#edit_block').show();
-    // });
-
     $('#delete').click(function () {
         if (confirm("Удалить?")) {
             let id = '<?php echo $article->id ?>';

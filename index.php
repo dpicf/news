@@ -19,7 +19,7 @@
                 while($article = $query->fetch(PDO::FETCH_OBJ)) {
                     echo "<h2>$article->title</h2>";
                     echo "<p>$article->announce</p>";
-                    echo "<p><b>Время публикации:</b> " . show_date($article) . "</p>";
+                    echo "<p><b>Время публикации:</b> " . show_date($article->created_at) . "</p>";
                     echo "<a href='/news/article.php?id=$article->id' title='$article->title'>";
                     echo "<button class='btn btn-warning mb-5 mr-2'>Читать полностью</button>";
                     echo "<a>";
