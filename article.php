@@ -16,6 +16,8 @@ require 'blocks/head.php';
 
 <?php require 'blocks/header.php'?>
 
+<?php //require 'edit_article.php'?>
+
 <main class="container mt-5">
     <div class="row">
         <div class="col-md-8">
@@ -32,10 +34,12 @@ require 'blocks/head.php';
                 </p>
             </div>
 
-            <div class="alert alert-danger  mt-2" id="error_block"></div>
+            <div class="alert alert-danger mt-2" id="error_block"></div>
 
             <?php if($_COOKIE['login'] == 'admin'): ?>
-                <button class='btn btn-primary mb-5 mr-2'>Редактировать</button>
+                <a href="/news/edit_article.php?id=<?= $article->id ?>" class='text-decoration-none'>
+                    <button class='btn btn-primary mb-5 mr-2' id='edit_article'>Редактировать</button>
+                </a>
                 <button class='btn btn-danger mb-5' id='delete'>Удалить</button>
             <?php endif; ?>
         </div>
@@ -43,6 +47,11 @@ require 'blocks/head.php';
 </main>
 
 <script>
+    // $('#edit_article').click(function () {
+    //     $('.container').hide();
+    //     $('#edit_block').show();
+    // });
+
     $('#delete').click(function () {
         if (confirm("Удалить?")) {
             let id = '<?php echo $article->id ?>';

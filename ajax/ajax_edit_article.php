@@ -1,7 +1,10 @@
 <?php
+$id = $_POST['id'];
 $title = trim(filter_var($_POST['title'], FILTER_SANITIZE_STRING));
 $announce = trim(filter_var($_POST['announce'], FILTER_SANITIZE_STRING));
 $body = trim(filter_var($_POST['body'], FILTER_SANITIZE_STRING));
+$created_at = $_POST['created_at'];
+$updated_at = time();
 
 require 'errors_articles.php';
 global $error;
@@ -14,8 +17,8 @@ if ($error != '') {
 require '../connect.php';
 global $pdo;
 
-$sql = 'INSERT INTO articles(title, announce, body, created_at, updated_at) VALUES(?, ?, ?, ?, ?)';
+$sql = 'UPDATE articles SET title = ?, announce = ?, body = ?, created_at = ?, updated_at = ? WHERE id = ?';
 $query = $pdo->prepare($sql);
-$query->execute([$title, $announce, $body, time(), time()]);
+$query->execute([$title, $announce, $body, $created_at, $updated_at, $id]);
 
-echo $pdo->lastInsertId();
+echo $id;

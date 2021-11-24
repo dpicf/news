@@ -7,7 +7,7 @@
     text-decoration: underline;
 }
 
-#error_block {
+#error_block, #edit_block {
     display: none;
 }
 
