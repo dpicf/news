@@ -34,8 +34,6 @@ require 'blocks/head.php'
     </div>
 </main>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 <script>
     $('#add_article').click(function () {
         let title = $('#title').val();
