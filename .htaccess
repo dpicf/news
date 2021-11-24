@@ -1,0 +1,6 @@
+ServerSignature Off
+AddDefaultCharset UTF-8
+
+ErrorDocument 404 /news/error.php
+
+#RewriteRule ^ajax?$ /news/ajax.php [NC, L]
