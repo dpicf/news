@@ -49,7 +49,7 @@ require 'blocks/head.php'
             data: {'title': title, 'announce': announce, 'body': body},
             dataType: 'html',
             success: function(data) {
-                if (data.indexOf('Ошибка') === -1) {
+                if (data.indexOf('Введите') === -1) {
                     document.location.href = '/news/article.php?id=' + data;
                 } else {
                     $('#error_block').show().text(data);
