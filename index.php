@@ -1,4 +1,5 @@
 <?php
+//    die($_SERVER['DOCUMENT_ROOT']);
     $website_title = 'Новости';
     require 'blocks/head.php'
 ?>
@@ -12,34 +13,30 @@
             require 'connect.php';
             global $pdo;
 
-            $page = $_GET['page'] == '' ? 1 : $_GET['page'];
+            $page = empty($_GET['page']) ? 1 : $_GET['page'];
 
             $count_per_page = 5;
 
-//            $query = $pdo->prepare('SELECT * FROM `articles` ORDER BY `created_at` DESC');
-            $query = $pdo->prepare('SELECT * FROM `articles`');
-            $query->execute();
+            $query_count = $pdo->prepare('SELECT * FROM `articles`');
+            $query_count->execute();
+            $count_articles = $query_count->rowCount();
 
-            $count_articles = $query->rowCount();
             $page_count = ceil($count_articles / $count_per_page);
-            $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $start = $page * $count_per_page - $count_per_page;
+            $sql = 'SELECT * FROM `articles` ORDER BY `created_at` DESC LIMIT ' . $start . ', ' . $count_per_page;
+            $query_records = $pdo->prepare($sql);
+            $query_records->execute();
+            $results = $query_records->fetchAll(PDO::FETCH_ASSOC);
 
             require 'functions.php';
-            for ($i = $page*$count_per_page; $i < ($page+1)*$count_per_page; $i++) {
-
-//                $sql = 'SELECT * FROM `articles` LIMIT ' . ($page - 1) . ', 3';
-//                $query_records = $pdo->prepare($sql);
-//                $query_records->execute();
-//                $results = $query_records->fetchAll(PDO::FETCH_ASSOC);
-
-                if ($results[$i - $count_per_page]['id'] != NULL) {
-                    echo "<h2>" . $results[$i - $count_per_page]['title'] . "</h2>";
-                    echo "<p>" . $results[$i - $count_per_page]['announce'] . "</p>";
-                    echo "<p><b>Время публикации:</b> " . show_date($results[$i - $count_per_page]['created_at']) . "</p>";
-                    echo "<a href='/news/article.php?id=" . $results[$i - $count_per_page]['id'] . "'>";
-                    echo "<button class='btn btn-outline-success mb-5 mr-2'>Читать полностью</button>";
-                    echo "<a>";
-                }
+            foreach ($results as $result) {
+                echo "<h2>" . $result['title'] . "</h2>";
+                echo "<p>" . $result['announce'] . "</p>";
+                echo "<p><b>Время публикации:</b> " . show_date($result['created_at']) . "</p>";
+                echo "<a href='/news/article.php?id=" . $result['id'] . "'>";
+                echo "<button class='btn btn-outline-success mb-5 mr-2'>Читать полностью</button>";
+                echo "<a>";
             }
             ?>
             <nav aria-label="...">
