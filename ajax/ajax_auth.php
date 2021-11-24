@@ -26,7 +26,7 @@ $query->execute(['login' => $login, 'password' => $password]);
 
 $user = $query->fetch(PDO::FETCH_OBJ);
 if ($user->id != 7) {
-    echo 'Вход доступен только администратору';
+    echo 'На данный момент, вход доступен только администратору';
 } else {
     setcookie('login', $login, time() + 3600 * 24 * 30, '/news/');
     echo 'Готово';
