@@ -17,7 +17,7 @@ if ($error != '') {
 $hash = "d54hd;fkh%^dh794fj";
 $password = md5($password . $hash);
 
-require '../connect.php';
+require_once '../connect.php';
 global $pdo;
 
 $sql = 'SELECT `id` FROM `users` WHERE `login` = :login && `password` = :password';

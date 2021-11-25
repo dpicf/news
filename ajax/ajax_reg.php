@@ -23,7 +23,7 @@ if ($error != '') {
 $hash = "d54hd;fkh%^dh794fj";
 $password = md5($password . $hash);
 
-require '../connect.php';
+require_once '../connect.php';
 global $pdo;
 
 $sql = 'INSERT INTO users(name, email, login, password) VALUES(?, ?, ?, ?)';

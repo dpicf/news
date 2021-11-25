@@ -3,7 +3,7 @@ $title = trim(filter_var($_POST['title'], FILTER_SANITIZE_STRING));
 $announce = trim(filter_var($_POST['announce'], FILTER_SANITIZE_STRING));
 $body = trim(filter_var($_POST['body'], FILTER_SANITIZE_STRING));
 
-require 'errors_articles.php';
+require_once 'errors_articles.php';
 global $error;
 
 if ($error != '') {
@@ -11,7 +11,7 @@ if ($error != '') {
     exit();
 }
 
-require '../connect.php';
+require_once '../connect.php';
 global $pdo;
 
 $sql = 'INSERT INTO articles(title, announce, body, created_at, updated_at) VALUES(?, ?, ?, ?, ?)';

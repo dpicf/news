@@ -7,10 +7,10 @@
 
 <?php
 $website_title = 'Добавление новости';
-require 'blocks/head.php'
+require_once 'blocks/head.php'
 ?>
 
-<?php require 'blocks/header.php'?>
+<?php require_once 'blocks/header.php'?>
 
 <main class="container mt-5">
     <div class="row">

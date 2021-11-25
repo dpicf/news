@@ -1,6 +1,6 @@
 <?php
 
-require 'connect.php';
+require_once 'connect.php';
 global $pdo;
 
 $sql = 'SELECT * FROM `articles` WHERE `id` = :id';
@@ -10,13 +10,13 @@ $query->execute(['id' => $_GET['id']]);
 $article = $query->fetch(PDO::FETCH_OBJ);
 
 $website_title = $article->title;
-require 'blocks/head.php';
+require_once 'blocks/head.php';
 
 ?>
 
-<?php require 'blocks/header.php' ?>
+<?php require_once 'blocks/header.php' ?>
 
-<?php require 'functions.php' ?>
+<?php require_once 'functions.php' ?>
 
 <main class="container mt-5">
     <div class="row">

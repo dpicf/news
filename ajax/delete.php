@@ -1,7 +1,7 @@
 <?php
 $id = $_POST['id'];
 
-require '../connect.php';
+require_once '../connect.php';
 global $pdo;
 
 $sql = 'DELETE FROM `articles` WHERE `id` = :id';
