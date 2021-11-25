@@ -23,7 +23,7 @@ require 'blocks/head.php';
 <main class="container mt-5">
     <div class="row">
         <div class="col-md-8">
-            <h4 class="mb-5">Добавление новости</h4>
+            <h4 class="mb-5">Редактирование новости</h4>
             <form action="" method="post">
                 <label for="title">Заголовок новости</label>
                 <input type="text" name="title" id="title" class="form-control"

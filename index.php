@@ -1,5 +1,4 @@
 <?php
-//    die($_SERVER['DOCUMENT_ROOT']);
     $website_title = 'Новости';
     require 'blocks/head.php'
 ?>
